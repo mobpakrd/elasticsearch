@@ -36,7 +36,6 @@ RUN set -ex \
 		./logs \
 		./config \
 		./config/scripts \
-		./plugins
 	; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
