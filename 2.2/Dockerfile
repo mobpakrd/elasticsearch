@@ -42,14 +42,14 @@ RUN set -ex \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
-# Install mapper-attachement
-RUN /elasticsearch/bin/plugin --install elasticsearch/elasticsearch-mapper-attachments
-
 COPY config ./config
 
 VOLUME /usr/share/elasticsearch/data
 
 COPY docker-entrypoint.sh /
+
+# Install mapper-attachement
+RUN /elasticsearch/bin/plugin --install elasticsearch/elasticsearch-mapper-attachments
 
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
