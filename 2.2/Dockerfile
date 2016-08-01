@@ -36,10 +36,14 @@ RUN set -ex \
 		./logs \
 		./config \
 		./config/scripts \
+		./plugins
 	; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
+
+# Install mapper-attachement
+RUN /elasticsearch/bin/plugin --install elasticsearch/elasticsearch-mapper-attachments
 
 COPY config ./config
 
