@@ -12,6 +12,8 @@ RUN set -x \
 	&& chmod +x /usr/local/bin/gosu \
 	&& gosu nobody true
 
+RUN groupadd -g 1000 elasticsearch && useradd elasticsearch -u 1000 -g 1000
+
 # https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
 # https://packages.elasticsearch.org/GPG-KEY-elasticsearch
 RUN apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 46095ACC8548582C1A2699A9D27D666CD88E42B4
@@ -50,6 +52,8 @@ COPY docker-entrypoint.sh /
 # Install mapper-attachement
 RUN /usr/share/elasticsearch/bin/plugin install mapper-attachments
 
+USER elasticsearch
+ENV PATH=$PATH:/usr/share/elasticsearch/bin
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["elasticsearch"]
