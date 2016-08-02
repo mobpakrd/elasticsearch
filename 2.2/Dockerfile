@@ -48,7 +48,7 @@ VOLUME /usr/share/elasticsearch/data
 COPY docker-entrypoint.sh /
 
 # Install mapper-attachement
-RUN /usr/share/elasticsearch/bin/plugin install elasticsearch/elasticsearch-mapper-attachments
+RUN /usr/share/elasticsearch/bin/plugin install mapper-attachments
 
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
